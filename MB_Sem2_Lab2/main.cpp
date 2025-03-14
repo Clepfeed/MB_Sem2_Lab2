@@ -27,11 +27,11 @@ vector<vector<double>> equidistantNodes(int n, int a, int b, double (*f)(double)
         f_x[1][i] = f(f_x[0][i]);
     }
 
-    for (int i = 0; i < n - 1; i++)
+    for (int i = 1; i < n; i++)
     {
-        for (int j = n - 1; j > i; j--)
+        for (int j = n - 1; j >= i; j--)
         {
-            f_x[1][j] = (f_x[1][j] - f_x[1][j - 1]) / (f_x[0][j] - f_x[0][j - i - 1]);
+            f_x[1][j] = (f_x[1][j] - f_x[1][j - 1]) / (f_x[0][j] - f_x[0][j - i]);
         }
     }
 
@@ -44,15 +44,15 @@ vector<vector<double>> chebyshevKnots(int n, int a, int b, double (*f)(double))
 
     for (int i = 0; i < n; i++)
     {
-        f_x[0][i] = (a + b) / 2 + ((b - a) / 2) * cos(((2 * i - 1) * PI) / 2 * (n + 1));
+        f_x[0][i] = (a + b) / 2.0 + ((b - a) / 2.0) * cos(((2.0 * i + 1) * PI) / (2.0 * n));
         f_x[1][i] = f(f_x[0][i]);
     }
 
-    for (int i = 0; i < n - 1; i++)
+    for (int i = 1; i < n; i++)
     {
-        for (int j = n - 1; j > i; j--)
+        for (int j = n - 1; j >= i; j--)
         {
-            f_x[1][j] = (f_x[1][j] - f_x[1][j - 1]) / (f_x[0][j] - f_x[0][j - i - 1]);
+            f_x[1][j] = (f_x[1][j] - f_x[1][j - 1]) / (f_x[0][j] - f_x[0][j - i]);
         }
     }
 
